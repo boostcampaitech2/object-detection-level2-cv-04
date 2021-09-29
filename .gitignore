@@ -6,3 +6,5 @@ output/*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*/output/*
+*/output_eval/*
