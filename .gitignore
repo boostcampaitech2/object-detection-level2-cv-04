@@ -8,3 +8,6 @@ __pycache__/
 *.py[cod]
 */output/*
 */output_eval/*
+
+# ipynb file
+detectron2
