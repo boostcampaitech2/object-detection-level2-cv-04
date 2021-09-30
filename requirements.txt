@@ -6,3 +6,4 @@ torchnet
 pandas
 map-boxes
 jupyter
+easydict
