@@ -10,4 +10,7 @@ __pycache__/
 */output_eval/*
 
 # ipynb file
+*.ipynb_checkpoints
+
+# detectron2
 detectron2
