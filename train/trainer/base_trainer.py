@@ -20,7 +20,7 @@ class BaseTrainer(DefaultTrainer):
   @classmethod
   def build_evaluator(cls, cfg, dataset_name, output_folder=None):
     if output_folder is None:
-      os.makedirs(cls.outputEvalDir)
+      os.makedirs(cls.outputEvalDir,exist_ok=True)
       output_folder = cls.outputEvalDir
         
     return COCOEvaluator(dataset_name, cfg, False, output_folder)
