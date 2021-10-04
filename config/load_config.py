@@ -4,7 +4,7 @@ from easydict import EasyDict as edict
 import os
 from datetime import datetime, timedelta
 
-def refineVal(x):
+def _refineVal(x):
 	key,val = x
 	
 	if val.isdigit():
@@ -24,7 +24,7 @@ def refineVal(x):
 
 	return key, val
 
-def refineOutputPath(isTrain, outputDir, customName):
+def _refineOutputPath(isTrain, outputDir, customName):
 	subPath = "train" if isTrain else "eval"
 	nowTime = datetime.now() + timedelta(hours=9)
 
@@ -36,20 +36,19 @@ def refineOutputPath(isTrain, outputDir, customName):
 		cnt+=1
 		
 		if not os.path.exists(path) : 
-			# os.makedirs(path)
 			return path
 
-def makeDictByConfig(isTrain=True):
+def makeDictByConfig():
 	parser = configparser.ConfigParser()
 	parser.read('config/config.ini', encoding='utf-8')
 	
 	cfgDict = edict()
 
 	for sect in parser.sections():
-		item = [refineVal(x) for x in parser.items(sect)]
+		item = [_refineVal(x) for x in parser.items(sect)]
 		cfgDict[sect] = dict(item)
 	
-	cfgDict.path.output_dir = refineOutputPath(isTrain, cfgDict.path.output_dir, cfgDict.name.custom_model)
-	cfgDict.path.output_eval_dir = refineOutputPath(False, cfgDict.path.output_eval_dir, cfgDict.name.custom_model)
+	cfgDict.path.output_dir = _refineOutputPath(True, cfgDict.path.output_dir, cfgDict.name.custom_model)
+	cfgDict.path.output_eval_dir = _refineOutputPath(False, cfgDict.path.output_eval_dir, cfgDict.name.custom_model)
 	return cfgDict
 
