@@ -28,8 +28,8 @@ class ConfigArgParser:
 
 
 	def _modifyConfig(self, cDict):
-		self.config.DATASETS.TRAIN = cDict.name.train_dataset
-		self.config.DATASETS.TEST = cDict.name.test_dataset
+		self.config.DATASETS.TRAIN = ((cDict.name.train_dataset,))
+		self.config.DATASETS.TEST = ((cDict.name.test_dataset,))
 
 		self.config.DATALOADER.NUM_WOREKRS = cDict.general.num_workers
 
