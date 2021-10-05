@@ -51,7 +51,7 @@ def makeDictByConfig():
 		item = [refineVal(x) for x in parser.items(sect)]
 		cfgDict[sect] = dict(item)
 	
-	cfgDict.path.output_dir = _refineOutputPath(True, cfgDict.path.output_dir, cfgDict.name.custom_model)
-	cfgDict.path.output_eval_dir = _refineOutputPath(False, cfgDict.path.output_eval_dir, cfgDict.name.custom_model)
+	# cfgDict.path.output_dir = _refineOutputPath(True, cfgDict.path.output_dir, cfgDict.name.custom_model)
+	# cfgDict.path.output_eval_dir = _refineOutputPath(False, cfgDict.path.output_eval_dir, cfgDict.name.custom_model)
 	return cfgDict
 

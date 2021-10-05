@@ -2,15 +2,34 @@ import argparse
 from detectron2 import model_zoo
 from detectron2.config import get_cfg 
 from config.load_config import makeDictByConfig, refineVal
+from datetime import datetime,timedelta
+import os
 
 class ConfigArgParser:
 	
 	def __init__(self):
 		self.customDict = self._addArgParser(makeDictByConfig())
+		self.customDict = self._refineOutputPath()
 		self.config = get_cfg()
 		
 		self._mergeConfig(self.customDict.name.modelzoo_config)
 		self._modifyConfig(self.customDict)
+
+	def _refineOutputPath(self):
+		# subPath = "train" if isTrain else "eval"
+		nowTime = datetime.now() + timedelta(hours=9)
+
+		cnt = 0
+		
+		while True:
+			addedName = f'{nowTime.strftime("%m-%d")}_{self.customDict.name.custom_model}_{cnt:02}'
+			path = os.path.join(self.customDict.path.output_dir,addedName)
+			cnt+=1
+			
+			if not os.path.exists(path) :
+				self.customDict.path.output_dir =  os.path.join(path,"train")
+				self.customDict.path.output_eval_dir = os.path.join(path,"eval")
+				return self.customDict
 
 	def _addArgParser(self, customDict):
 		parser = argparse.ArgumentParser()
