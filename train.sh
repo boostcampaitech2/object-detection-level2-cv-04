@@ -7,8 +7,8 @@
 # 아래 건들 필요 없이 여기부분만 커스텀하면 됩니다
 # 따로 수정사항 없으면 주석처리!! ( ctrl+/ or cmd+/ )
 
-# train_json="dataset/train.json" #(default : dataset/train.json)
-# test_json="dataset/test.json" #(default : dataset/test.json)
+# train_json="dataset/train_0.json" #(default : dataset/train_0.json)
+# test_json="dataset/valid_0.json" #(default : dataset/valid_0.json)
 # image_root="dataset/" #(default : dataset/ )
 # output_dir="output" #(default : output)
 # output_eval_dir="output" #(default : output) 
@@ -27,7 +27,7 @@ roi_num_classes="10" #(default : 10)
 
 seed="42" #(default : 42)
 base_lr="0.001" #(default : 0.001)
-ims_per_batch="4" #(default : 4)
+ims_per_batch="8" #(default : 4)
 max_iter="15000" #(default : 15000)
 steps="8000,12000" #(default : 8000,12000)
 gamma="0.005" #(default : 0.005)
