@@ -7,20 +7,20 @@ class BaseTrainer(DefaultTrainer):
 
   outputEvalDir = ""
   mapper = None
-  
+  sampler = None
   def __init__(self, cfg):
     super().__init__(cfg)
 
   @classmethod
   def build_train_loader(cls, cfg, sampler=None):
       return build_detection_train_loader(
-      cfg, mapper = cls.mapper, sampler = sampler
+      cfg, mapper = cls.mapper, sampler = cls.sampler
       )
     
   @classmethod
   def build_evaluator(cls, cfg, dataset_name, output_folder=None):
     if output_folder is None:
-      os.makedirs(cls.outputEvalDir)
+      os.makedirs(cls.outputEvalDir,exist_ok=True)
       output_folder = cls.outputEvalDir
         
     return COCOEvaluator(dataset_name, cfg, False, output_folder)
