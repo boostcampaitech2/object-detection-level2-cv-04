@@ -1,6 +1,7 @@
 from train.src.config_arg_parser import ConfigArgParser
 from train.src.set_seed import setSeed
 from train.src.register_dataset import registerDataset
+from train.src.module_caller import getModule
 from config.load_config import makeDictByConfig
 
 from importlib import import_module
@@ -38,14 +39,19 @@ def main():
 	# Set Mapper
 	# TODO: 문자열로 되어있는 부분 바꾸기
 	# mapperModule = getattr(import_module("train.mapper.base_mapper"), "BaseMapper")
-	mapperModule = getattr(import_module("train.mapper.custom_mapper"), "CustomMapper")
+	mapperModule = getModule("mapper","custom_mapper")
 	mapper = mapperModule()
 	
+	# Set Sampler
+	samplerModule = getModule("sampler","custom_sampler")
+	sampler = samplerModule(seed=customDict.hyperparam.seed)
+
 	# Set Trainer
 	# TODO: 문자열로 되어있는 부분 바꾸기
-	trainerModule = getattr(import_module("train.trainer.base_trainer"), "BaseTrainer")
+	trainerModule = getModule("trainer","base_trainer")
 	trainerModule.outputEvalDir = customDict.path.output_eval_dir
 	trainerModule.mapper = mapper
+	trainerModule.sampler = sampler
 	
 	print(trainerModule.outputEvalDir)
 
