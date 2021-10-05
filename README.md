@@ -6,7 +6,7 @@ bash setup.sh
 
 ## Usage
 
-- Detectron 모델 훈련하기
+- Detectron2 모듈로 모델 훈련하기
 
 	train.sh 내 인자를 조정하여 HyperParameter와 경로 등을 수정합니다.
 
