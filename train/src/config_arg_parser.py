@@ -1,27 +1,56 @@
 import argparse
 from detectron2 import model_zoo
 from detectron2.config import get_cfg 
+from config.load_config import makeDictByConfig, refineVal
 
 class ConfigArgParser:
 	
-	def __init__(self, customDict):
-		self._addArgParser()
+	def __init__(self):
+		self.customDict = self._addArgParser(makeDictByConfig())
 		self.config = get_cfg()
-
-		self._addArgParser()
 		
-		self._mergeConfig(customDict.name.modelzoo_config)
-		self._modifyConfig(customDict)
+		self._mergeConfig(self.customDict.name.modelzoo_config)
+		self._modifyConfig(self.customDict)
 
+	def _addArgParser(self, customDict):
+		parser = argparse.ArgumentParser()
 
-	# TODO
-	# arg따라 config 바꿔주기
-	def _addArgParser(self):
-		# print(dict(self.cfg))
-		pass
+		parser.add_argument('--train_json', required=False)
+		parser.add_argument('--test_json', required=False)
+		parser.add_argument('--image_root', required=False)
+		parser.add_argument('--modelzoo_config', required=False)
+		parser.add_argument('--custom_model', required=False)
+		parser.add_argument('--mapper', required=False)
+		parser.add_argument('--trainer', required=False)
+		parser.add_argument('--sampler', required=False)
+		parser.add_argument('--num_workers', required=False)
+
+		parser.add_argument('--seed', required=False)
+		parser.add_argument('--base_lr', required=False)
+		parser.add_argument('--ims_per_batch', required=False)
+		parser.add_argument('--max_iter', required=False)
+		parser.add_argument('--steps', required=False)
+		parser.add_argument('--gamma', required=False)
+		parser.add_argument('--checkpoint_period', required=False)
+		parser.add_argument('--test_eval_period', required=False)
+		parser.add_argument('--roi_batch', required=False)
+
+		args, other = parser.parse_known_args()
+
+		for key,val in vars(args).items():
+			if not val == None:
+				for mainkey in customDict.keys():
+					if key in customDict[mainkey] :
+						_, rVal = refineVal((key,val))
+						customDict[mainkey][key] = rVal
+		
+		return customDict
 	
 	def getConfig(self):
 		return self.config
+
+	def getCustomDict(self):
+		return self.customDict
 
 	def _mergeConfig(self, configName):
 		self.config.merge_from_file(model_zoo.get_config_file(configName))
