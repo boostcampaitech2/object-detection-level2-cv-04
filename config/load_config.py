@@ -4,7 +4,7 @@ from easydict import EasyDict as edict
 import os
 from datetime import datetime, timedelta
 
-def _refineVal(x):
+def refineVal(x):
 	key,val = x
 	
 	if val.isdigit():
@@ -13,14 +13,17 @@ def _refineVal(x):
 	elif re.match(r'^-?\d+(?:\.\d+)$', val):
 		val = float(val)
 
-	elif re.match("^\(",val):
-		val = tuple(map(int,(val[1:-1].split(","))))
+	# elif re.match("^\(",val):
+	# 	val = tuple(map(int,(val[1:-1].split(","))))
 	
 	elif key in "classes":
 		val = [x for x in val.split("  ")]
 	
 	elif key in "resume":
 		val = True if val in "True" else False
+
+	elif key in "steps":
+		val = tuple(map(int,(val.split(","))))
 
 	return key, val
 
@@ -45,7 +48,7 @@ def makeDictByConfig():
 	cfgDict = edict()
 
 	for sect in parser.sections():
-		item = [_refineVal(x) for x in parser.items(sect)]
+		item = [refineVal(x) for x in parser.items(sect)]
 		cfgDict[sect] = dict(item)
 	
 	cfgDict.path.output_dir = _refineOutputPath(True, cfgDict.path.output_dir, cfgDict.name.custom_model)
