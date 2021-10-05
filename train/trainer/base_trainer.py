@@ -7,14 +7,14 @@ class BaseTrainer(DefaultTrainer):
 
   outputEvalDir = ""
   mapper = None
-  
+  sampler = None
   def __init__(self, cfg):
     super().__init__(cfg)
 
   @classmethod
   def build_train_loader(cls, cfg, sampler=None):
       return build_detection_train_loader(
-      cfg, mapper = cls.mapper, sampler = sampler
+      cfg, mapper = cls.mapper, sampler = cls.sampler
       )
     
   @classmethod
