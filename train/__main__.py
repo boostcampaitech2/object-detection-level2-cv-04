@@ -4,8 +4,6 @@ from train.src.register_dataset import registerDataset
 from train.src.module_caller import getModule
 from config.save_config import saveConfig
 
-from importlib import import_module
-
 import os
 
 def main():
@@ -41,7 +39,7 @@ def main():
 	
 	# Set Sampler
 	samplerModule = getModule("sampler",customDict.name.sampler)
-	sampler = samplerModule(seed=customDict.hyperparam.seed)
+	sampler = samplerModule(size = 3902, seed=customDict.hyperparam.seed)
 
 	# Set Trainer
 	trainerModule = getModule("trainer",customDict.name.trainer)
