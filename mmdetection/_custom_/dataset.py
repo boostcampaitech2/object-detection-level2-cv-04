@@ -32,17 +32,17 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=4,
-    workers_per_gpu=2,
+    samples_per_gpu=8,
+    workers_per_gpu=4,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'train.json',
+        ann_file=data_root + 'train_0.json',
         img_prefix=data_root,
         classes=classes,
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'test.json',
+        ann_file=data_root + 'valid_0.json',
         img_prefix=data_root,
         classes=classes,
         pipeline=test_pipeline),

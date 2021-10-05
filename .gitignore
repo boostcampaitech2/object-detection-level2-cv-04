@@ -14,5 +14,10 @@ __pycache__/
 
 # detectron2
 detectron2
+
+# mmdetection
 mmdetection/*
 !mmdetection/_custom_
+
+# output
+work_dirs
