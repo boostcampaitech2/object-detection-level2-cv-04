@@ -1,4 +1,6 @@
+from re import match
 from typing import Optional
+from unicodedata import decimal
 from detectron2.engine import DefaultTrainer
 from detectron2.engine.train_loop import HookBase
 from detectron2.evaluation import COCOEvaluator
@@ -10,8 +12,10 @@ from fvcore.nn.precise_bn import get_bn_modules
 from tqdm import tqdm
 
 from detectron2.utils import comm
-from detectron2.utils.events import CommonMetricPrinter, JSONWriter, TensorboardXWriter, get_event_storage
-import torch
+from detectron2.utils.events import CommonMetricPrinter, EventWriter, JSONWriter, TensorboardXWriter, get_event_storage
+
+
+import wandb
 
 class TQDMHook(HookBase):
   def __init__(self, step) -> None:
@@ -118,12 +122,13 @@ class BaseTrainer(DefaultTrainer):
                         CustomMetricPrinter(self.showTQDM,self.cfg.SOLVER.MAX_ITER),
                         JSONWriter(os.path.join(self.cfg.OUTPUT_DIR, "metrics.json")),
                         TensorboardXWriter(self.cfg.OUTPUT_DIR),
+                        # WandB_Printer(name = self.cfg.OUTPUT_DIR.split("/")[1], project="object-detection",entity="cv4")
                       ]
-                      
 
           ret.append(hooks.PeriodicWriter(writerList, period=10))
 
           ret.append(TQDMHook(step=1))
+          ret.append(hooks.PeriodicWriter([WandB_Printer(name = self.cfg.OUTPUT_DIR.split("/")[1], project="object-detection",entity="cv4")],period=1))
 
       return ret
 
@@ -152,3 +157,79 @@ class CustomMetricPrinter(CommonMetricPrinter):
       showDict[k] = v
 
     self.tqdmModule.set_postfix(showDict)
+
+class WandB_Printer(EventWriter):
+  def __init__(self, name, project, entity) -> None:
+    self._window_size=20
+    self._matchDictList = self._makeMatchDictList()
+
+    wandb.login(key="9c0f093e4e917b31bfc57ae5227b2b4e88aa14e1")
+    
+    self.wandb = wandb.init(project=project,entity=entity,name=name)
+    
+  def write(self):
+    storage = get_event_storage()
+
+    sendDict = self.makeSendDict(storage)
+    self.wandb.log(sendDict)
+ 
+
+  def makeSendDict(self, storage):
+    sendDict = {}
+
+    storageDict = self._makeStorageDict(storage)
+
+    for item in self._matchDictList:
+      sendDict = self._findValue(storageDict,item["key"],sendDict,item["customKey"],item["subKey"])
+
+    return sendDict 
+  
+  def _makeStorageDict(self,storage):
+    storageDict = {}
+    for k,v in [(k, f"{v.median(self._window_size):.4g}") for k, v in storage.histories().items()]:
+      storageDict[k] = float(v)
+
+    return storageDict
+
+  def _findValue(self,storageDict,key, retDict, customKey, subKey=None):
+    if key in storageDict:
+      if subKey is None:
+        retDict[customKey] = storageDict[key]
+      else:
+        retDict["/".join([subKey,customKey])] = storageDict[key]
+
+    return retDict
+  
+  def _makeMatchDictList(self):
+    matchDictList = []
+
+    matchDictList.append(self._makeMatchDict(key="lr",customKey="detectron_learning_rate",subKey=None))
+
+    matchDictList.append(self._makeMatchDict(key="total_loss",customKey="loss",subKey="train"))
+    matchDictList.append(self._makeMatchDict(key="loss_box_reg",customKey="loss_rpn_bbox",subKey="train")) #이거아니면 loss_rpn_loc 임
+    matchDictList.append(self._makeMatchDict(key="loss_rpn_cls",customKey="loss_rpn_cls",subKey="train"))
+
+    matchDictList.append(self._makeMatchDict(key="bbox/AP",customKey="bbox_mAP",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP50",customKey="bbox_mAP_50",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP75",customKey="bbox_mAP_75",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/APl",customKey="bbox_mAP_l",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/APm",customKey="bbox_mAP_m",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/APs",customKey="bbox_mAP_s",subKey="val"))
+
+    #mmdetection엔 없는것들
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-General trash",customKey="bbox_mAP_General trash",subKey="val")) 
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Paper",customKey="bbox_mAP_Paper",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Paper pack",customKey="bbox_mAP_Paper pack",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Metal",customKey="bbox_mAP_Metal",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Glass",customKey="bbox_mAP_Glass",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Plastic",customKey="bbox_mAP_Plastic",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Styrofoam",customKey="bbox_mAP_Styrofoam",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Plastic bag",customKey="bbox_mAP_Plastic bag",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Battery",customKey="bbox_mAP_Battery",subKey="val"))
+    matchDictList.append(self._makeMatchDict(key="bbox/AP-Clothing",customKey="bbox_mAP_Clothing",subKey="val"))
+
+    return matchDictList
+  
+  def _makeMatchDict(self,key,customKey,subKey):
+    return {"key":key, "customKey":customKey, "subKey":subKey}
+  
