@@ -56,7 +56,7 @@ class BaseTrainer(DefaultTrainer):
   sampler = None
 
   def __init__(self, cfg):
-    self.build_optimizer = build_optimizer
+    # self.build_optimizer = build_optimizer
     self.showTQDM = tqdm(range(cfg.SOLVER.MAX_ITER))
     super().__init__(cfg)
 
@@ -189,7 +189,11 @@ class WandB_Printer(EventWriter):
   def _makeStorageDict(self,storage):
     storageDict = {}
     for k,v in [(k, f"{v.median(self._window_size):.4g}") for k, v in storage.histories().items()]:
-      storageDict[k] = float(v)
+      if "AP" in k:
+        # AP to mAP
+        storageDict[k] = float(v) * 0.01
+      else:
+        storageDict[k] = float(v)
 
     return storageDict
 
