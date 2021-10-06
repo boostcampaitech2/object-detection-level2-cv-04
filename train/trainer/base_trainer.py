@@ -7,6 +7,7 @@ from detectron2.evaluation import COCOEvaluator
 from detectron2.data import build_detection_train_loader
 import os
 from detectron2.engine.defaults import hooks
+from detectron2.solver.build import get_default_optimizer_params, maybe_add_gradient_clipping
 from fvcore.nn.precise_bn import get_bn_modules
 
 from tqdm import tqdm
@@ -14,6 +15,7 @@ from tqdm import tqdm
 from detectron2.utils import comm
 from detectron2.utils.events import CommonMetricPrinter, EventWriter, JSONWriter, TensorboardXWriter, get_event_storage
 
+import torch
 
 import wandb
 
@@ -27,24 +29,24 @@ class TQDMHook(HookBase):
       self.trainer.showTQDM.update(self.step)
 
 
-# def build_optimizer(cfg: CfgNode, model: torch.nn.Module) -> torch.optim.Optimizer:
-#     """
-#     Build an optimizer from config.
-#     """
-#     params = get_default_optimizer_params(
-#         model,
-#         base_lr=cfg.SOLVER.BASE_LR,
-#         weight_decay_norm=cfg.SOLVER.WEIGHT_DECAY_NORM,
-#         bias_lr_factor=cfg.SOLVER.BIAS_LR_FACTOR,
-#         weight_decay_bias=cfg.SOLVER.WEIGHT_DECAY_BIAS,
-#     )
-#     return maybe_add_gradient_clipping(cfg, torch.optim.SGD)(
-#         params,
-#         lr=cfg.SOLVER.BASE_LR,
-#         momentum=cfg.SOLVER.MOMENTUM,
-#         nesterov=cfg.SOLVER.NESTEROV,
-#         weight_decay=cfg.SOLVER.WEIGHT_DECAY,
-#     )
+def build_optimizer(cfg, model: torch.nn.Module) -> torch.optim.Optimizer:
+    """
+    Build an optimizer from config.
+    """
+    params = get_default_optimizer_params(
+        model,
+        base_lr=cfg.SOLVER.BASE_LR,
+        weight_decay_norm=cfg.SOLVER.WEIGHT_DECAY_NORM,
+        bias_lr_factor=cfg.SOLVER.BIAS_LR_FACTOR,
+        weight_decay_bias=cfg.SOLVER.WEIGHT_DECAY_BIAS,
+    )
+    return maybe_add_gradient_clipping(cfg, torch.optim.Adam)(
+        params,
+        lr=cfg.SOLVER.BASE_LR,
+        # momentum=cfg.SOLVER.MOMENTUM,
+        # nesterov=cfg.SOLVER.NESTEROV,
+        weight_decay=cfg.SOLVER.WEIGHT_DECAY,
+    )
 
 
 class BaseTrainer(DefaultTrainer):
@@ -54,7 +56,7 @@ class BaseTrainer(DefaultTrainer):
   sampler = None
 
   def __init__(self, cfg):
-    # self.build_optimizer = build_optimizer
+    self.build_optimizer = build_optimizer
     self.showTQDM = tqdm(range(cfg.SOLVER.MAX_ITER))
     super().__init__(cfg)
 
