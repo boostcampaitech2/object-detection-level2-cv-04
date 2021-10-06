@@ -3,6 +3,7 @@ from train.src.set_seed import setSeed
 from train.src.register_dataset import registerDataset
 from train.src.module_caller import getModule
 from config.save_config import saveConfig
+from train.src.get_dataset_dict import getDatasetDicts
 
 import os
 
@@ -11,7 +12,8 @@ def main():
 	# Set Detectron Config by Arg
 	parser = ConfigArgParser()
 	customDict = parser.getCustomDict()
-
+	cfg = parser.getConfig()
+	
 	# Set Seed
 	setSeed(customDict.hyperparam.seed)
 	
@@ -32,13 +34,17 @@ def main():
 		istrain=False
 	)
 
-
 	# Set Mapper
 	mapperModule = getModule("mapper",customDict.name.mapper)
 	mapper = mapperModule()
 	
 	# Set Sampler
 	samplerModule = getModule("sampler",customDict.name.sampler)
+
+	if "repeatfactor" in customDict.name.sampler:
+		samplerModule.repeat_factors = getDatasetDicts(cfg)
+		samplerModule.threshold = 0.5
+	
 	sampler = samplerModule(size = 3902, seed=customDict.hyperparam.seed)
 
 	# Set Trainer
@@ -50,7 +56,7 @@ def main():
 	# Start Train
 	os.makedirs(customDict.path.output_dir)
 	saveConfig(customDict.path.output_dir, customDict)
-	trainer = trainerModule(cfg = parser.getConfig())
+	trainer = trainerModule(cfg = cfg)
 	trainer.resume_or_load(resume=customDict.option.resume)
 	trainer.train()
 	
