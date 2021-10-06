@@ -11,7 +11,6 @@ def saveConfig(path, configDict):
 			if subKey in "classes":
 				config[mainKey][subKey] = "  ".join(val)
 			elif subKey in "steps":
-				print(val)
 				config[mainKey][subKey] = ",".join([str(x) for x in val])
 			else:
 				config[mainKey][subKey] = str(val)
