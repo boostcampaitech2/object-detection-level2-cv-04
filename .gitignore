@@ -21,3 +21,4 @@ mmdetection/*
 
 # output
 work_dirs
+wandb
