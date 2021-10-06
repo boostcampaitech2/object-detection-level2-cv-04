@@ -27,5 +27,5 @@ class BaseMapper:
 
         return dataset_dict
     
-    def _addTransForm(self, transform : T.Augmentation):
+    def _addTransForm(self, transform):
         self.transformList.append(transform)
