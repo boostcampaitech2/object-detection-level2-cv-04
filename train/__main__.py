@@ -13,7 +13,7 @@ def main():
 	parser = ConfigArgParser()
 	customDict = parser.getCustomDict()
 	cfg = parser.getConfig()
-	
+
 	# Set Seed
 	setSeed(customDict.hyperparam.seed)
 	
@@ -36,7 +36,10 @@ def main():
 
 	# Set Mapper
 	mapperModule = getModule("mapper",customDict.name.mapper)
-	mapper = mapperModule()
+	if "albu" in customDict.name.mapper:
+		mapper = mapperModule(cfg)
+	else:
+		mapper = mapperModule()
 	
 	# Set Sampler
 	samplerModule = getModule("sampler",customDict.name.sampler)
