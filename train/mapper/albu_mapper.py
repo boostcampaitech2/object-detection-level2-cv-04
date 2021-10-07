@@ -40,8 +40,8 @@ class AlbuMapper:
 
         augm_boxes = np.array(augm_annotation['bboxes'], dtype=np.float32)
         # sometimes bbox annotations go beyond image
-        augm_boxes[:, :] = augm_boxes[:, :].clip(
-            min=[0, 0, 0, 0], max=[w, h, w, h])
+        # augm_boxes[:] = augm_boxes[:].clip(
+        #     min=[0, 0, 0, 0], max=[w, h, w, h])
         augm_labels = np.array(augm_annotation['category_id'])
         dataset_dict['annotations'] = [
             {
