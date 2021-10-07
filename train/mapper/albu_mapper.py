@@ -85,3 +85,6 @@ class AlbuMapper:
         ).contiguous()
 
         return dataset_dict
+
+    def _addTransForm(self, transform):
+        self.transformList.append(transform)

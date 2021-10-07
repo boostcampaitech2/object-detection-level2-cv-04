@@ -1,7 +1,7 @@
-from train.mapper.base_mapper import DummyAlbuMapper
+from train.mapper.base_mapper import AlbuMapper
 import albumentations as A
 
-class CustomMapper(DummyAlbuMapper):
+class CustomMapper(AlbuMapper):
 
 	def __init__(self):
 			super().__init__()
