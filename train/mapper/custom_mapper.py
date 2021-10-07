@@ -13,7 +13,7 @@ class CustomMapper(DummyAlbuMapper):
 			self._addTransForm(A.HueSaturationValue(hue_shift_limit=15, sat_shift_limit=25, val_shift_limit=10, p=0.5))
 			self._addTransForm(A.GaussNoise(p=0.3))
 
-			# self._addTransForm(A.OneOf
+			self._addTransForm(A.OneOf())
 
 
 # dict(
