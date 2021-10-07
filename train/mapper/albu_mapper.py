@@ -11,7 +11,7 @@ from detectron2.structures import BoxMode
 
 
 class AlbuMapper:
-    def __init__(self,cfg,jsonPath="train/mapper/albumentation.json",imgFormat="" ,is_train=True,isCrop=False, cropType="relative_range", cropSize=[0.9,0.9]):
+    def __init__(self, cfg, jsonPath="train/mapper/albumentation.json", imgFormat="", is_train=True, isCrop=False, cropType="relative_range", cropSize=[0.9, 0.9]):
         self.aug = self._get_aug(jsonPath)
         self.img_format = imgFormat
         self.resize_gen = utils.build_transform_gen(cfg, is_train)
@@ -19,7 +19,7 @@ class AlbuMapper:
             self.crop_gen = T.RandomCrop(cropType, cropSize)
         else:
             self.crop_gen = None
-            
+
     def _get_aug(self, arg):
         with open(arg) as f:
             return A.from_dict(json.load(f))
@@ -27,7 +27,8 @@ class AlbuMapper:
     def __call__(self, dataset_dict):
         dataset_dict = copy.deepcopy(dataset_dict)
 
-        img = utils.read_image(dataset_dict['file_name'], format=self.img_format)
+        img = utils.read_image(
+            dataset_dict['file_name'], format=self.img_format)
 
         boxes = [ann['bbox'] for ann in dataset_dict['annotations']]
         labels = [ann['category_id'] for ann in dataset_dict['annotations']]
@@ -39,7 +40,8 @@ class AlbuMapper:
 
         augm_boxes = np.array(augm_annotation['bboxes'], dtype=np.float32)
         # sometimes bbox annotations go beyond image
-        augm_boxes[:, :] = augm_boxes[:, :].clip(min=[0, 0, 0, 0], max=[w, h, w, h])
+        augm_boxes[:, :] = augm_boxes[:, :].clip(
+            min=[0, 0, 0, 0], max=[w, h, w, h])
         augm_labels = np.array(augm_annotation['category_id'])
         dataset_dict['annotations'] = [
             {
@@ -50,7 +52,7 @@ class AlbuMapper:
             }
             for i in range(len(augm_boxes))
         ]
-        
+
         if self.crop_gen:
             # image crop using detectron tools
             crop_tfm = utils.gen_crop_transform_with_instance(
