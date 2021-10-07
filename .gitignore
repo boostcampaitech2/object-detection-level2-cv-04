@@ -18,7 +18,12 @@ detectron2
 # mmdetection
 mmdetection/*
 !mmdetection/_custom_
+!mmdetection/tools
+
 
 # output
 work_dirs
 wandb
+
+# apex
+apex
