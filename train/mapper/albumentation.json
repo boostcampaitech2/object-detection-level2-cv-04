@@ -1,5 +1,5 @@
 {
-	"__version__": "0.3.2",
+	"__version__": "1.0.3",
 	"transform": {
 			"__class_fullname__": "albumentations.core.composition.Compose",
 			"p": 1.0,
