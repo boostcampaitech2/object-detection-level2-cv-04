@@ -1,8 +1,8 @@
 _base_ = [
     '/opt/ml/detection/object-detection-level2-cv-04/mmdetection/configs/_base_/models/cascade_rcnn_swin_fpn.py',
-    '../dataset.py',
+    '../swin/dataset.py',
     '/opt/ml/detection/object-detection-level2-cv-04/mmdetection/configs/_base_/schedules/schedule_1x.py',
-    '/opt/ml/detection/object-detection-level2-cv-04/mmdetection/configs/_base_/default_runtime.py'
+    '../swin/default_runtime.py'
 ]
 
 model = dict(
@@ -84,7 +84,7 @@ img_norm_cfg = dict(
 # augmentation strategy originates from DETR / Sparse RCNN
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', with_bbox=True, with_mask=True),
+    dict(type='LoadAnnotations', with_bbox=True),
     dict(type='RandomFlip', flip_ratio=0.5),
     dict(type='AutoAugment',
          policies=[
@@ -118,7 +118,7 @@ train_pipeline = [
     dict(type='Normalize', **img_norm_cfg),
     dict(type='Pad', size_divisor=32),
     dict(type='DefaultFormatBundle'),
-    dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_masks']),
+    dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
 ]
 data = dict(train=dict(pipeline=train_pipeline))
 
@@ -127,15 +127,4 @@ optimizer = dict(_delete_=True, type='AdamW', lr=0.0001, betas=(0.9, 0.999), wei
                                                  'relative_position_bias_table': dict(decay_mult=0.),
                                                  'norm': dict(decay_mult=0.)}))
 lr_config = dict(step=[27, 33])
-runner = dict(type='EpochBasedRunnerAmp', max_epochs=36)
-
-# do not use mmdet version fp16
-fp16 = None
-optimizer_config = dict(
-    type="DistOptimizerHook",
-    update_interval=1,
-    grad_clip=None,
-    coalesce=True,
-    bucket_size_mb=-1,
-    use_fp16=True,
-)
+runner = dict(type='EpochBasedRunner', max_epochs=36)

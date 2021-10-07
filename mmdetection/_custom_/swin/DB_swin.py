@@ -23,7 +23,7 @@ img_norm_cfg = dict(
 # augmentation strategy originates from HTC
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', with_bbox=True, with_mask=True),
+    dict(type='LoadAnnotations', with_bbox=True),
     dict(type='RandomFlip', flip_ratio=0.5),
     dict(
         type='Resize',
@@ -51,7 +51,7 @@ test_pipeline = [
         ])
 ]
 
-samples_per_gpu=1
+samples_per_gpu=2
 data = dict(samples_per_gpu=samples_per_gpu,
             train=dict(pipeline=train_pipeline),
             val=dict(pipeline=test_pipeline),
