@@ -56,6 +56,7 @@ train_dataset = dict(
         type=dataset_type,
         ann_file=data_root + 'train_0.json',
         img_prefix=data_root,
+        classes=classes,
         pipeline=[
             dict(type='LoadImageFromFile', to_float32=True),
             dict(type='LoadAnnotations', with_bbox=True)
@@ -63,7 +64,6 @@ train_dataset = dict(
         filter_empty_gt=False,
     ),
     pipeline=train_pipeline,
-    classes=classes,
     dynamic_scale=img_scale)
 
 data = dict(
