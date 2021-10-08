@@ -10,14 +10,14 @@ model = dict(
     type='RetinaNet',
     backbone=dict(
         type='ResNet',
-        depth=50,
+        depth=101,
         num_stages=4,
         out_indices=(0, 1, 2, 3),
         frozen_stages=1,
         norm_cfg=norm_cfg,
         norm_eval=False,
         style='pytorch',
-        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet50')),
+        init_cfg=dict(type='Pretrained', checkpoint='torchvision://resnet101')),
     neck=dict(type='NASFPN', stack_times=7, norm_cfg=norm_cfg),
     bbox_head=dict(type='RetinaSepBNHead', num_ins=5, norm_cfg=norm_cfg),
     # training and testing settings
