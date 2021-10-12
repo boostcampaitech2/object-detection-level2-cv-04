@@ -13,7 +13,8 @@ def main():
 	parser = ConfigArgParser()
 	customDict = parser.getCustomDict()
 	cfg = parser.getConfig()
-
+	# print(cfg)
+	# exit()
 	# Set Seed
 	setSeed(customDict.hyperparam.seed)
 	
@@ -59,7 +60,13 @@ def main():
 	# Start Train
 	os.makedirs(customDict.path.output_dir)
 	saveConfig(customDict.path.output_dir, customDict)
-	trainer = trainerModule(cfg = cfg)
+
+	if "swin" in customDict.name.trainer:
+		trainer = trainerModule(cfg,customDict)
+	else:
+		trainer = trainerModule(cfg = cfg)
+		
+
 	trainer.resume_or_load(resume=customDict.option.resume)
 	trainer.train()
 	
