@@ -10,5 +10,9 @@ __pycache__/
 */output_eval/*
 
 # library files / 추가하고 싶은 파일이 있다면, !mmdetection/custom와 같이 작성하여 추가할 수 있습니다.
-mmdetection/*
-detectron2/*
+mmdetection-master/ai_stage_models/*/check_point
+mmdetection-master/ai_stage_models/*/wandb
+swin_git/ai_stage/*/check_point
+swin_git/ai_stage/*/wandb
+swin_git/ai_stage/*/INFO
+swin_git/checkpoints/*
