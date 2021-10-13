@@ -6,7 +6,7 @@ __pycache__/
 # Dataset
 dataset/test/*
 dataset/train/*
-
+dataset/yolov5/*
 # Detectron
 detectron/run/*
 
