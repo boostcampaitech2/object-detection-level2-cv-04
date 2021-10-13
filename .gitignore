@@ -9,10 +9,21 @@ __pycache__/
 */output/*
 */output_eval/*
 
-wandb/*
+# ipynb file
+*.ipynb_checkpoints
 
-# library files / 추가하고 싶은 파일이 있다면, !mmdetection/custom와 같이 작성하여 추가할 수 있습니다.
+# detectron2
+detectron2
+
+# mmdetection
 mmdetection/*
 !mmdetection/custom
-#good
-detectron2/*
+!mmdetection/tools
+
+
+# output
+work_dirs
+wandb
+
+# apex
+apex
