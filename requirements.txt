@@ -1,9 +1,0 @@
-albumentations
-pycocotools
-opencv-python
-tqdm
-torchnet
-pandas
-map-boxes
-jupyter
-easydict

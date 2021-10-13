@@ -7,19 +7,21 @@
 # 아래 건들 필요 없이 여기부분만 커스텀하면 됩니다
 # 따로 수정사항 없으면 주석처리!! ( ctrl+/ or cmd+/ )
 
-# train_json="dataset/train_0.json" #(default : dataset/train_0.json)
-# test_json="dataset/valid_0.json" #(default : dataset/valid_0.json)
+train_json="dataset/train_0.json" #(default : dataset/train_0.json)
+test_json="dataset/valid_0.json" #(default : dataset/valid_0.json)
 # image_root="dataset/" #(default : dataset/ )
 # output_dir="output" #(default : output)
 # output_eval_dir="output" #(default : output) 
 
 # train_dataset="coco_trash_train" #(default : coco_trash_train)
 # test_dataset="coco_trash_test" #(default : coco_trash_test)
-modelzoo_config="COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml" #(default : COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml)
-custom_model="albumtest" # output에 저장될 이름입니다 (default : test1)
-mapper="albu_mapper" #(default : base_mapper)
-trainer="base_trainer" #(default : base_trainer)
+modelzoo_config="COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml" #(default : COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml)
+custom_model="faster_resx101_fpn" # output에 d 저장될 이름입니다 (default : test1)
+mapper="custom_mapper" #(default : base_mapper)
+# trainer="swin_trainer" #(default : base_trainer)
 sampler="repeatfactor_sampler" #(default : custom_sampler)
+
+# optimizer="AdamW" #(default : SGD) 현재 몬가..이상함...
 
 # classes="General trash  Paper  Paper pack  Metal  Glass  Plastic  Styrofoam  Plastic bag  Battery  Clothing"
 num_workers="4" #(default : 4)
@@ -28,10 +30,10 @@ roi_num_classes="10" #(default : 10)
 seed="42" #(default : 42)
 base_lr="0.001" #(default : 0.001)
 ims_per_batch="8" #(default : 4)  
-max_iter="15000" #(default : 15000)
-steps="8000,12000" #(default : 8000,12000)
+max_iter="30000" #(default : 15000)
+steps="15000,25000" #(default : 8000,12000)
 gamma="0.5" #(default : 0.005)
-checkpoint_period="1000" #(default : 3000)
+checkpoint_period="3000" #(default : 3000)
 test_eval_period="1000" #(default : 3000)
 roi_batch="128" #(default : 128)
 
@@ -61,6 +63,7 @@ addCmd "mapper" ${mapper:-""}
 addCmd "trainer" ${trainer:-""}
 addCmd "sampler" ${sampler:-""}
 addCmd "classes" ${classes:-""}
+addCmd "optimizer" ${optimizer:-""}
 addCmd "num_workers" ${num_workers:-""}
 addCmd "roi_num_classes" ${roi_num_classes:-""}
 addCmd "seed" ${seed:-""}
