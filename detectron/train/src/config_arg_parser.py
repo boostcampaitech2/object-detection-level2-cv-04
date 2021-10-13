@@ -13,7 +13,7 @@ class ConfigArgParser:
 		self.config = get_cfg()
 		
 		self._mergeConfig(self.customDict.name.modelzoo_config)
-		self._modifyConfig(self.customDict)
+		self.modifyConfig(self.customDict)
 
 	def _refineOutputPath(self):
 		# subPath = "train" if isTrain else "eval"
@@ -44,6 +44,7 @@ class ConfigArgParser:
 		parser.add_argument('--sampler', required=False)
 		parser.add_argument('--num_workers', required=False)
 
+		parser.add_argument('--optimizer', required=False)
 		parser.add_argument('--seed', required=False)
 		parser.add_argument('--base_lr', required=False)
 		parser.add_argument('--ims_per_batch', required=False)
@@ -75,7 +76,7 @@ class ConfigArgParser:
 		self.config.merge_from_file(model_zoo.get_config_file(configName))
 
 
-	def _modifyConfig(self, cDict):
+	def modifyConfig(self, cDict):
 		self.config.DATASETS.TRAIN = ((cDict.name.train_dataset,))
 		self.config.DATASETS.TEST = ((cDict.name.test_dataset,))
 
@@ -96,5 +97,11 @@ class ConfigArgParser:
 
 		self.config.MODEL.ROI_HEADS.BATCH_SIZE_PER_IMAGE = cDict.hyperparam.roi_batch
 		self.config.MODEL.ROI_HEADS.NUM_CLASSES = cDict.general.roi_num_classes
+		self.config.MODEL.RETINANET.NUM_CLASSES = cDict.general.roi_num_classes
+
+		self.config.SOLVER.OPTIMIZER = cDict.general.optimizer
 
 		self.config.TEST.EVAL_PERIOD = cDict.hyperparam.test_eval_period
+
+
+		self.config.MODEL.MASK_ON = False
