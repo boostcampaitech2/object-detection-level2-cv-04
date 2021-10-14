@@ -1,3 +1,13 @@
+## Overview
+
+Detectron2을 이용한 모델 훈련입니다.  
+주로 **ResNeXT101+Faster R-CNN+FPN**, **ResNet50+Cascade R-CNN+FPN**을 사용했습니다.
+
+|Model|리더보드 mAP|Valid mAP|
+|---|:---:|:---:|
+|ResNeXT101+Faster R-CNN+FPN|0.491|0.51|
+|ResNet50+Cascade R-CNN+FPN|0.542|0.571|
+
 ## Install
 
 ```bash
