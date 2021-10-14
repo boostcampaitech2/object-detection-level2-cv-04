@@ -13,11 +13,13 @@ def main():
 	parser = ConfigArgParser()
 	customDict = parser.getCustomDict()
 	cfg = parser.getConfig()
-	# print(cfg)
-	# exit()
+	
 	# Set Seed
 	setSeed(customDict.hyperparam.seed)
 	
+	# print(cfg)
+	# exit(0)
+
 	# Register Dataset
 	registerDataset(
 		datasetName = customDict.name.train_dataset,

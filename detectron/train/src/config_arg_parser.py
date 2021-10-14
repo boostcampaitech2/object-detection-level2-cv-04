@@ -16,7 +16,6 @@ class ConfigArgParser:
 		self.modifyConfig(self.customDict)
 
 	def _refineOutputPath(self):
-		# subPath = "train" if isTrain else "eval"
 		nowTime = datetime.now() + timedelta(hours=9)
 
 		cnt = 0
