@@ -17,3 +17,5 @@ swin_git/ai_stage/*/wandb
 swin_git/ai_stage/*/INFO
 swin_git/checkpoints/*
 etc
+efficientdet/*/*.pth
+output/efficientdet/*.csv
