@@ -9,8 +9,8 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 
 ## 🏆 LB Score
 
-- Private LB: 0.698 mAP (3등/19팀)
-- Public LB: 
+- Public LB: 0.698 mAP (3등/19팀)
+- Private LB: 
 
 ## 🎈 Main Subject
 
@@ -21,8 +21,9 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 ## 🔑 Project Summary
 
 - 여러 종류의 쓰레기 사진들을 입력값으로 받아 쓰레기의 종류와 위치를 파악하는 Object Detection 시스템 구현
+- EDA: 
 - CV Strategy: 각 클래스의 비율을 고려하여 Training Dataset과 Validation Dataset을 8대2 비율로 나누고 Validation Dataset의 검증력을 위해 동일한 이미지가 Training Set과 Validation Set에 들어가지 않도록 함
-- Data Augmentation: 
+- Data Augmentation: EDA 이후 Albumentation을 이용하여 여러가지 실험을 거친 결과 
 - Backbone Model:
 - Loss: 
 - Seed: 42로 고정
