@@ -1,0 +1,19 @@
+# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+
+# Example usage: python train.py --data trash.yaml
+# parent
+# ├── yolov5
+# └── datasets
+#     └── yolov5
+#          ├── train
+#          └── valid  
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: ../dataset/yolov5 # dataset root dir
+train: images/train  # train images (relative to 'path') 
+val: images/valid  # val images (relative to 'path') 
+# test:
+
+# Classes
+nc: 10  # number of classes
+names: ['General trash', 'Paper', 'Paper pack', 'Metal', 'Glass', 'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing']  # class names

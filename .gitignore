@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 */wandb/*
+*/.ipynb_checkpoints/*
 
 # Dataset
 dataset/test/*
@@ -10,13 +11,20 @@ dataset/yolov5/images/*
 dataset/yolov5/labels/*
 
 # Detectron
+detectron2/*
+
+# Yolo
+yolov5/*.pt
+
+# mmdetection
+mmdetection/*
+!mmdetection/configs
+!mmdetection/README.md
 
 # Output
 output/detectron/*
+output/yolov5/*
+
+
 
 # library files / 추가하고 싶은 파일이 있다면, !mmdetection/custom와 같이 작성하여 추가할 수 있습니다.
-mmdetection/*
-!mmdetection/config
-!mmdetection/README.md
-
-detectron2/*
