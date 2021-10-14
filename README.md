@@ -64,5 +64,20 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 ## 💁‍♀️ Composition
 
 (폴더 구성 설명)
+```
+object-detection-level2-cv-04
+├──dataset
+|   ├──eda
+|   |   ├──
+|   |   ├──
+|   |   └──
+|   └──something   
+├──train
+|    ├──images/
+|    ├──train_18class/
+|    ├──val_18class/
+|    └──train.csv
+└──something
+```
 
 각 폴더 별 자세한 사용 설명은 폴더 내 README.md 참고
