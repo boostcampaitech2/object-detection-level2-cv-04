@@ -1,6 +1,10 @@
 # ♻️ Object Detection for Recycling Trash
 
+</br>
+
 Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
+
+</br>
 
 ## 👨‍🌾 Team
 
