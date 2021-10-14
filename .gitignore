@@ -6,7 +6,6 @@ __pycache__/
 # Dataset
 dataset/test/*
 dataset/train/*
-<<<<<<< HEAD
 dataset/yolov5/images/*
 dataset/yolov5/labels/*
 
@@ -21,14 +20,7 @@ detectron2/*
 !mmdetection/configs
 mmdetection/configs/*
 !mmdetection/configs/cascade_swins_fpn
-=======
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-
-# library files / 추가하고 싶은 파일이 있다면, !mmdetection/custom와 같이 작성하여 추가할 수 있습니다.
-efficientdet/*/*.pth
-output/efficientdet/*.csv
-# libra, dynamic rcnn work_dirs의 pth 추가 필요
->>>>>>> 8ecfc5dc21973ec23df6e33b83db46879ce43561
