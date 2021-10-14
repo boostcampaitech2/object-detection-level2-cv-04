@@ -25,6 +25,7 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 - Data Augmentation: 
 - Backbone Model:
 - Loss: 
+- Seed: 42로 고정
 - Submission: 
 
 ### Dataset
