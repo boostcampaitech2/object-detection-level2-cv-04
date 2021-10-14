@@ -20,6 +20,14 @@ mmdetection/*
 !mmdetection/custom
 !mmdetection/tools
 
+# yolov5
+yolov5/*
+!yolov5/data/hyps/hyp.scratch_trash.yaml
+!yolov5/models/hub/yolov5m6_trash.yaml
+!yolov5/models/yolov5m_trash.yaml
+!yolov5/utils/augmentations_trash.py
+!yolov5/train_trash.py
+
 
 # output
 work_dirs
