@@ -6,7 +6,8 @@ __pycache__/
 # Dataset
 dataset/test/*
 dataset/train/*
-dataset/yolov5/*
+dataset/yolov5/images/*
+dataset/yolov5/labels/*
 
 # Detectron
 
