@@ -2,8 +2,6 @@
 
 Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 
-</br>
-
 ## 👨‍🌾 Team
 
 - Level 2 CV Team 4 - 무럭무럭 감자밭 🥔
