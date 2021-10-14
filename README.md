@@ -34,6 +34,6 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
     - Object Detection에서 사용하는 대표적인 성능 측정 방법
     - Ground Truth 박스와 Prediction 박스간 IoU(Intersection Over Union, Detector의 정확도를 평가하는 지표)가 50이 넘는 예측에 대해 True라고 판단
 
-## Composition
+### Composition
 
 (폴더 구성 설명)
