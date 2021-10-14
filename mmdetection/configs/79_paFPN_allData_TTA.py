@@ -11,10 +11,10 @@
 
 # merge configs
 _base_ = [
-    '/opt/ml/detection/mmdetection/configs/_submit_/cascade_rcnn_r50_fpn.py', 
-    '/opt/ml/detection/mmdetection/configs/_submit_/dataset_no_valid.py', 
-    '/opt/ml/detection/mmdetection/configs/_submit_/default_runtime.py', 
-    '/opt/ml/detection/mmdetection/configs/_submit_/schedule_2x.py', 
+    'cascade_rcnn_r50_fpn.py', 
+    'dataset_no_valid.py', 
+    'default_runtime.py', 
+    'schedule_2x.py', 
 ]
 
 
