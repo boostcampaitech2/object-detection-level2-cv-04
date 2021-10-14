@@ -22,7 +22,17 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 
 ### Dataset
 
+- 전체 이미지 개수 : 9754장
+- 10 class : General trash, Paper, Paper pack, Metal, Glass, Plastic, Styrofoam, Plastic bag, Battery, Clothing
+- 이미지 크기 : (1024, 1024)
+- 학습데이터는 4883장, 평가데이터는 4871장으로 무작위 선정
+    - 평가데이터: Public 50%, Private 50%
+
 ### Metrics
+
+- mAP50 (Mean Average Precision)
+    - Object Detection에서 사용하는 대표적인 성능 측정 방법
+    - Ground Truth 박스와 Prediction 박스간 IoU(Intersection Over Union, Detector의 정확도를 평가하는 지표)가 50이 넘는 예측에 대해 True라고 판단
 
 ## Composition
 
