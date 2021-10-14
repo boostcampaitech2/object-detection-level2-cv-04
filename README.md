@@ -20,6 +20,13 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 
 ## Project Summary
 
+- 여러 종류의 쓰레기 사진들을 입력값으로 받아 쓰레기의 종류와 위치를 파악하는 Object Detection 시스템 구현
+- CV Strategy: 각 클래스의 비율을 고려하여 Training Dataset과 Validation Dataset을 8대2 비율로 나누고 Validation Dataset의 검증력을 위해 동일한 이미지가 Training Set과 Validation Set에 들어가지 않도록 함
+- Data Augmentation: 
+- Backbone Model:
+- Loss: 
+- Submission: 
+
 ### Dataset
 
 - 전체 이미지 개수 : 9754장
@@ -37,3 +44,5 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 ### Composition
 
 (폴더 구성 설명)
+
+각 폴더 별 자세한 사용 설명은 폴더 내 README.md 참고
