@@ -1,7 +1,16 @@
 # 🔎 Object Detection for Recycling Trash
-## Team 4 - 무럭무럭 감자밭 🥔
 
 Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
+
+## Team
+
+- Level 2 CV Team 4 - 무럭무럭 감자밭 🥔
+- 팀 구성원: 김세영, 박성진, 신승혁, 이상원, 이윤영, 이채윤, 조성욱
+
+## LB Score
+
+- Private LB: 0.698 mAP (3등)
+- Public LB: 
 
 ## Main Subject
 
