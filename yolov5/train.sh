@@ -9,10 +9,10 @@
 
 weights="yolov5x6.pt" #(default : ROOT / 'yolov5s.pt')
 data="trash.yaml" #(default=ROOT / 'data/coco128.yaml')
-hyp="hyp.p6" #(default=ROOT / 'data/hyps/hyp.scratch.yaml')
+hyp="hyp.p6.yaml" #(default=ROOT / 'data/hyps/hyp.scratch.yaml')
 epochs="100" #(default=300)
-batch-size="12" #(default=16)
-img-size="1024" #(default=640)
+batch_size="12" #(default=16)
+img_size="1024" #(default=640)
 # workers="8" #(default=8)
 project="../output/yolov5/" # project_dir (default=ROOT / 'runs/train')
 # name="exp" # experiment_name (default='exp')
@@ -33,15 +33,15 @@ addCmd "weights" ${weights:-""}
 addCmd "data" ${data:-""}
 addCmd "hyp" ${hyp:-""}
 addCmd "epochs" ${epochs:-""}
-addCmd "batch-size" ${batch-size:-""}
-addCmd "img-size" ${img-size:-""}
+addCmd "batch_size" ${batch_size:-""}
+addCmd "img_size" ${img_size:-""}
 addCmd "workers" ${workers:-""}
 addCmd "project" ${project:-""}
 addCmd "name" ${name:-""}
 addCmd "freeze" ${freeze:-""}
 addCmd "save_period" ${save_period:-""}
 
-source /opt/conda/bin/activate;
-echo python3 -m train $cmd #혹시나 어떤 입력이 들어가는지 궁금하시다면
+# source /opt/conda/bin/activate;
+# echo python3 -m train $cmd #혹시나 어떤 입력이 들어가는지 궁금하시다면
 python3 -m train $cmd
 
