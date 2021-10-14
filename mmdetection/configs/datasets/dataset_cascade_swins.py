@@ -103,11 +103,11 @@ test_pipeline = [
 
 # data settings
 data = dict(
-    samples_per_gpu=8, #batch size for gpu
-    workers_per_gpu=2, #num workers
+    samples_per_gpu=8, # batch size for GPU
+    workers_per_gpu=2, # num_workers
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'train.json',
+        ann_file=data_root + 'train.json',  # use entire train dataset
         img_prefix=data_root,
         classes=classes,
         pipeline=train_pipeline),

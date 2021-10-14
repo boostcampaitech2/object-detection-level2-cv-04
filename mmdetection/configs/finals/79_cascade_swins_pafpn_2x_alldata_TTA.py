@@ -11,16 +11,16 @@
 
 # merge configs
 _base_ = [
-    'cascade_rcnn_r50_fpn.py', 
-    'dataset_no_valid.py', 
-    'default_runtime.py', 
-    'schedule_2x.py', 
+    '../models/cascade_rcnn_r50_fpn.py', 
+    '../datasets/dataset_all_data.py', 
+    '../default_runtime.py', 
+    '../schedules/schedule_2x.py', 
 ]
 
-
-# Load pretrained swinT model
+# Load pretrained Swin-T model
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'
-# modify configs
+
+# set model backbone to Swin-T
 model = dict(
     backbone=dict(
         _delete_=True,              # dump original config's model.backbone
@@ -47,6 +47,8 @@ model = dict(
         out_channels=256,
         num_outs=5
         ))
+
+# modify data.test pipeline config - for TTA
 data = dict(
     test=dict(
         pipeline=[
