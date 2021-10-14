@@ -1,5 +1,5 @@
 # log, checkpoint 저장 등에 대한 것 (default 그대로 가져옴)
-checkpoint_config = dict(interval=1)
+checkpoint_config = dict(interval=3) # interval 수정
 # yapf:disable
 log_config = dict(
     interval=50,
@@ -14,7 +14,7 @@ log_config = dict(
                 # name='38-1_cascade_original'
                 project='od',
                 entity='seunghyukshin',
-                name='4_cascade+adamw+swinS+aug'
+                name='0_1_fasterrcnn+adamw'
             ))
     ])
 # yapf:enable
