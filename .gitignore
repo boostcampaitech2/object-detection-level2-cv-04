@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 */wandb/*
 */.ipynb_checkpoints/*
+.readthedocs.yml
 
 # Dataset
 dataset/test/*
