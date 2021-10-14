@@ -3,7 +3,7 @@
 # 가상환경 설정
 source /opt/conda/bin/activate;
 
-# detectron2 설치 후 설치폴더 제거
+# detectron2 설치
 git clone https://github.com/facebookresearch/detectron2;
 python -m pip install -e detectron2;
 
