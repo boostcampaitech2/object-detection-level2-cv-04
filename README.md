@@ -35,8 +35,6 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 - Seed: 42로 고정
 - Submission: 
 
-</br>
-
 ### Dataset
 
 - 전체 이미지 개수 : 9754장
@@ -44,8 +42,6 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 - 이미지 크기 : (1024, 1024)
 - 학습데이터는 4883장, 평가데이터는 4871장으로 무작위 선정
     - 평가데이터: Public 50%, Private 50%
-
-</br>
 
 ### Metrics
 
