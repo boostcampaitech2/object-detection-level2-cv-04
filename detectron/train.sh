@@ -7,8 +7,8 @@
 # 아래 건들 필요 없이 여기부분만 커스텀하면 됩니다
 # 따로 수정사항 없으면 주석처리!! ( ctrl+/ or cmd+/ )
 
-train_json="dataset/train_0.json" #(default : dataset/train_0.json)
-test_json="dataset/valid_0.json" #(default : dataset/valid_0.json)
+train_json="../dataset/train_0.json" #(default : dataset/train_0.json)
+test_json="../dataset/valid_0.json" #(default : dataset/valid_0.json)
 # image_root="dataset/" #(default : dataset/ )
 # output_dir="output" #(default : output)
 # output_eval_dir="output" #(default : output) 
