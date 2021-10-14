@@ -18,7 +18,7 @@ detectron2
 # mmdetection
 mmdetection/*
 !mmdetection/custom
-!mmdetection/tools
+!mmdetection/tools/train.py
 
 # yolov5
 yolov5/*
