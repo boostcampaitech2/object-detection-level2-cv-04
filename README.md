@@ -33,14 +33,14 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 - 여러 종류의 쓰레기 사진들을 입력값으로 받아 쓰레기의 종류와 위치를 파악하는 Object Detection
 - 여러가지 API([mmdetection](https://github.com/open-mmlab/mmdetection) & [detectron2](https://github.com/facebookresearch/detectron2) & [yolov5](https://github.com/ultralytics/yolov5))내 저장된 이용하여 단일모델 출력의 다양성을 상승
     - 각 framework와 API의 이해도를 높이기 위하여 폴더 별로 구성
-- EDA: 주어진 데이터셋을 이해하기 위해 ipynb 파일로 시각화하여 학습데이터의 전체 & 클래스별 구성과 이미지들의 특징들을 파악하여 프로젝트 인사이트 향상
+- EDA: 주어진 데이터셋을 이해하기 위해 ipynb 파일로 시각화하여 학습데이터의 전체 & 클래스별 구성과 이미지들의 특징들을 파악하여 대회 인사이트 향상
 - CV Strategy: 각 클래스의 비율을 고려한 Training Dataset과 Validation Dataset을 8대2 비율로 분리
 - Data Augmentation : Albumentation 라이브러리를 이용
     - Flip, RandomRotate90 : 가장 효과적인 Augmentation이였으며 이후 TTA에서도 사용되어 높은 성능향상
     - RandomResizedCrop : Flip과 마찬가지로 여러가지 크기와 잘린 이미지들이 들어올 수 있어서 해당 Augmentation 적용
     - RandomBrightnessContrast, HueSaturationValue : EDA 결과 여러가지 밝기와 색상의 입력이 들어올 수 있어서 해당 Augmentation을 적용
     - GaussNoise, Blur : 초점이 어긋난 사진이 있어 해당 Augmentation 적용
-- [TTA](https://inspaceai.github.io/2019/12/20/Test_Time_Augmentation_Review/)
+- [TTA(Test Time Augmentation)](https://inspaceai.github.io/2019/12/20/Test_Time_Augmentation_Review/)
 - Ensemble: [Weighted-Boxes-Fusion](https://github.com/ZFTurbo/Weighted-Boxes-Fusion) 라이브러리를 사용하여 단일 모델들로 0.601~0.629 사이의 mAP점수들을 최대 **0.698 mAP**까지 향상 
 
 ### Dataset
