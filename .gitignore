@@ -15,12 +15,12 @@ __pycache__/
 detectron2/*
 
 # Yolo
-yolov5/*.pt
+1_yolov5/*.pt
 
 # mmdetection
-mmdetection/*
-!mmdetection/configs
-!mmdetection/README.md
+1_mmdetection/*
+!1_mmdetection/configs
+!1_mmdetection/README.md
 
 Swin-Transformer-Object-Detection/*
 !Swin-Transformer-Object-Detection/configs
