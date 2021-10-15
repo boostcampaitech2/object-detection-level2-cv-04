@@ -13,3 +13,10 @@ cd mmdetection
 pip install openmim
 mim install mmdet
 ```
+
+## Train
+```
+cd mmdetection
+python tools/train.py configs/finals/[experiment_name].py
+```
+all_data 실험의 경우, --no-validate 옵션을 주어 실행해야 합니다. 
