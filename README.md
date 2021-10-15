@@ -28,6 +28,14 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 
 </br>
 
+## Development Environment
+GPU : Nvidia Tesla V100
+OS : Linux Ubuntu 18.04
+Runtime : Python 3.8.5
+Main Dependency : Yolov5, MMdetection, Detectron2, Pytorch 1.7.1, OpenCV 4.5.1
+
+<br>
+
 ## 🔑 Project Summary
 
 - 여러 종류의 쓰레기 사진들을 입력값으로 받아 쓰레기의 종류와 위치를 파악하는 Object Detection
