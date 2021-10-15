@@ -1,3 +1,11 @@
+|Model|Valid mAP|
+|---|:---:|
+|efficientdet0_epoch100|0.294|
+|efficientdet0_epoch30|0.279|
+|efficientdet3(basecode)|0.32|
+|efficientdet3(label_modify)|0.357|
+|efficientdet4|0.262|
+
 ## Install
 
 ```bash
