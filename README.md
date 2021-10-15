@@ -28,7 +28,7 @@ Boostcourse AI Competition from [https://stages.ai/](https://stages.ai/)
 
 </br>
 
-## Development Environment
+## ⚙ Development Environment
 GPU : Nvidia Tesla V100
 OS : Linux Ubuntu 18.04
 Runtime : Python 3.8.5
