@@ -1,3 +1,13 @@
+## Overview
+
+Detectron2을 이용한 모델 훈련입니다.  
+주로 **ResNeXT101+Faster R-CNN+FPN**, **ResNet50+Cascade R-CNN+FPN**을 사용했습니다.
+
+|Model|리더보드 mAP|Valid mAP|
+|---|:---:|:---:|
+|ResNeXT101+Faster R-CNN+FPN|0.491|0.51|
+|ResNet50+Cascade R-CNN+FPN|0.542|0.571|
+
 ## Install
 
 ```bash
@@ -6,7 +16,7 @@ bash setup.sh
 
 ## Usage
 
-- Detectron2 모듈로 모델 훈련하기
+- Detectron2 모듈로 train 하기
 
 	train.sh 내 인자를 조정하여 HyperParameter와 경로 등을 수정합니다.
 
@@ -52,4 +62,27 @@ bash setup.sh
 	bash train.sh
 	```
 
-	
+- Detectron2 모듈로 inference 하기
+	```bash
+	#inference.sh 내부 코드, Custom Arg 부분만 커스텀하면 됩니다.
+
+	# 실행은 터미널에서 
+	# bash {이 스크립트파일 이름} 
+
+	# ----- Custom Arg -----
+	# 아래 건들 필요 없이 여기부분만 커스텀하면 됩니다
+	# 따로 수정사항 없으면 주석처리!! ( ctrl+/ or cmd+/ )
+
+	test_json="../dataset/test.json" #default="../dataset/test.json"
+	image_root="../dataset/" #default = "../dataset/"
+	modelzoo_config="COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml" #default="COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml"
+	model_dir="../output/detectron/10-14_faster_resx101_fpn_01/train" #default="../output/detectron/10-14_faster_resx101_fpn_01/train"
+	model_name="model_0000009" #default="model_0000009"
+	output_csv_name="det_submission" #default="det_submission"
+
+	# ----------------------
+	```
+
+	```bash
+	bash inference.sh
+	```
