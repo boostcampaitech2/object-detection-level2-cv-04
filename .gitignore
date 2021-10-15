@@ -6,26 +6,26 @@ __pycache__/
 .readthedocs.yml
 
 # Dataset
-dataset/test/*
-dataset/train/*
-dataset/yolov5/images/*
-dataset/yolov5/labels/*
+0_dataset/test/*
+0_dataset/train/*
+0_dataset/yolov5/images/*
+0_dataset/yolov5/labels/*
 
 # Detectron
 detectron2/*
 
 # Yolo
-yolov5/*.pt
+1_yolov5/*.pt
 
 # mmdetection
-mmdetection/*
-!mmdetection/configs
-!mmdetection/README.md
+1_mmdetection/*
+!1_mmdetection/configs
+!1_mmdetection/README.md
 
-Swin-Transformer-Object-Detection/*
-!Swin-Transformer-Object-Detection/configs
-!Swin-Transformer-Object-Detection/README.md
+1_Swin-Transformer-Object-Detection/*
+!1_Swin-Transformer-Object-Detection/configs
+!1_Swin-Transformer-Object-Detection/README.md
 
 # Output
-output/detectron/*
-output/yolov5/*
+2_output/detectron/*
+2_output/yolov5/*
