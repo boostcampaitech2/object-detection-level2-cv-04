@@ -22,9 +22,9 @@ detectron2/*
 !1_mmdetection/configs
 !1_mmdetection/README.md
 
-Swin-Transformer-Object-Detection/*
-!Swin-Transformer-Object-Detection/configs
-!Swin-Transformer-Object-Detection/README.md
+1_Swin-Transformer-Object-Detection/*
+!1_Swin-Transformer-Object-Detection/configs
+!1_Swin-Transformer-Object-Detection/README.md
 
 # Output
 output/detectron/*
