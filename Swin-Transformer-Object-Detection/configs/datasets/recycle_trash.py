@@ -58,7 +58,8 @@ train_pipeline = [
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
 
 ]
-test_pipeline = [
+
+val_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
@@ -73,6 +74,24 @@ test_pipeline = [
             dict(type='Collect', keys=['img']),
         ])
 ]
+
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(
+        type='MultiScaleFlipAug',
+        img_scale=(1024, 1024),
+        flip=True,
+        transforms=[
+            dict(type='Resize', keep_ratio=True),
+            dict(type='RandomFlip', direction=['horizontal', 'vertical', 'diagonal']),
+            dict(type='Normalize', **img_norm_cfg),
+            dict(type='Pad', size_divisor=32),
+            dict(type='ImageToTensor', keys=['img']),
+            dict(type='Collect', keys=['img']),
+        ])
+]
+
+
 
 # 윤영님이 주신 5개 stratified k-fold crossvalidation 중 일부를 이용하여 검증 진행 (0 ~ 4 까지 바꿔줄 수 있음)
 data = dict(
@@ -89,11 +108,12 @@ data = dict(
         ann_file=data_root + 'valid_0.json', # 0 번째 이용
         img_prefix=data_root,
         classes=classes,
-        pipeline=test_pipeline),
+        pipeline=val_pipeline),
     test=dict(
         type=dataset_type,
         ann_file=data_root + 'test.json',
         img_prefix=data_root,
         classes=classes,
         pipeline=test_pipeline))
+    
 evaluation = dict(interval=1, metric='bbox')

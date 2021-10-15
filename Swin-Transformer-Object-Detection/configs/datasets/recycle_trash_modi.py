@@ -2,14 +2,12 @@
 dataset_type = 'CocoDataset'
 data_root = '../dataset/'
 
-# class settings
-classes = ['General trash', 'Paper', 'Paper pack', 'Metal', 'Glass', 'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing']
+# class setting
+classes = ("General trash", "Paper", "Paper pack", "Metal", "Glass", "Plastic", "Styrofoam", "Plastic bag", "Battery", "Clothing")
 
-# set normalize value
+# augmentation 많은 것
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
-
-# Albumentations transforms settings
 albu_train_transforms = [
     dict(
     type='OneOf',
@@ -18,7 +16,7 @@ albu_train_transforms = [
         dict(type='RandomRotate90',p=1.0)
     ],
     p=0.5),
-    dict(type='RandomResizedCrop',height=1024, width=1024, scale=(0.5, 1.0), p=0.5),
+    dict(type='RandomResizedCrop',height=512, width=512, scale=(0.5, 1.0), p=0.5),
     dict(type='RandomBrightnessContrast',brightness_limit=0.1, contrast_limit=0.15, p=0.5),
     dict(type='HueSaturationValue', hue_shift_limit=15, sat_shift_limit=25, val_shift_limit=10, p=0.5),
     dict(type='GaussNoise', p=0.3),
@@ -33,7 +31,6 @@ albu_train_transforms = [
     p=0.1)
 ]
 
-# set train_pipeline
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
@@ -62,8 +59,7 @@ train_pipeline = [
 
 ]
 
-# set valid pipeline
-valid_pipeline = [
+val_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
@@ -79,50 +75,45 @@ valid_pipeline = [
         ])
 ]
 
-# set test_pipeline for TTA(Test Time Augmentation)
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
         img_scale=(1024, 1024),
         flip=True,
-        flip_direction = ['horizontal','vertical', "diagonal"],
         transforms=[
             dict(type='Resize', keep_ratio=True),
-            dict(type='RandomFlip'),
-            dict(
-                type='Normalize',
-                mean=[123.675, 116.28, 103.53],
-                std=[58.395, 57.12, 57.375],
-                to_rgb=True),
+            dict(type='RandomFlip', direction=['horizontal', 'vertical', 'diagonal']),
+            dict(type='Normalize', **img_norm_cfg),
             dict(type='Pad', size_divisor=32),
             dict(type='ImageToTensor', keys=['img']),
-            dict(type='Collect', keys=['img'])
+            dict(type='Collect', keys=['img']),
         ])
 ]
 
-# data settings
+
+
+# 윤영님이 주신 5개 stratified k-fold crossvalidation 중 일부를 이용하여 검증 진행 (0 ~ 4 까지 바꿔줄 수 있음)
 data = dict(
-    samples_per_gpu=8, #batch size for gpu
-    workers_per_gpu=2, #num workers
+    samples_per_gpu=4, # 2개는 넘 적소
+    workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'train.json',
+        ann_file=data_root + 'train_modify.json', # 0 번째 이용
         img_prefix=data_root,
         classes=classes,
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'valid_0.json',
+        ann_file=data_root + 'valid_0.json', # 0 번째 이용
         img_prefix=data_root,
         classes=classes,
-        pipeline=valid_pipeline),
+        pipeline=val_pipeline),
     test=dict(
         type=dataset_type,
         ann_file=data_root + 'test.json',
         img_prefix=data_root,
         classes=classes,
         pipeline=test_pipeline))
-
-# evaluation settings
+    
 evaluation = dict(interval=1, metric='bbox')
