@@ -1,9 +1,15 @@
 # dataset settings
 dataset_type = 'CocoDataset'
 data_root = '../dataset/'
-classes = ['General trash', 'Paper', 'Paper pack', 'Metal', 'Glass', 'Plastic','Styrofoam', 'Plastic bag', 'Battery', 'Clothing']
+
+# class settings
+classes = ['General trash', 'Paper', 'Paper pack', 'Metal', 'Glass', 'Plastic', 'Styrofoam', 'Plastic bag', 'Battery', 'Clothing']
+
+# set normalize value
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
+
+# Albumentations transforms settings
 albu_train_transforms = [
     dict(
     type='OneOf',
@@ -26,11 +32,13 @@ albu_train_transforms = [
     ],
     p=0.1)
 ]
+
+# set train_pipeline
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='LoadAnnotations', with_bbox=True), # Bring Annotation boxes
+    dict(type='LoadAnnotations', with_bbox=True),
     dict(type='Resize', img_scale=(1024, 1024), keep_ratio=True),
-    dict(type='RandomFlip', flip_ratio=0.5),
+    dict(type='RandomFlip', flip_ratio=0.0),
     dict(
         type='Albu',
         transforms=albu_train_transforms,
@@ -51,8 +59,11 @@ train_pipeline = [
     dict(type='Pad', size_divisor=32),
     dict(type='DefaultFormatBundle'),
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels']),
+
 ]
-test_pipeline = [
+
+# set valid pipeline
+valid_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
@@ -67,25 +78,51 @@ test_pipeline = [
             dict(type='Collect', keys=['img']),
         ])
 ]
+
+# set test_pipeline for TTA(Test Time Augmentation)
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(
+        type='MultiScaleFlipAug',
+        img_scale=(1024, 1024),
+        flip=True,
+        flip_direction = ['horizontal','vertical', "diagonal"],
+        transforms=[
+            dict(type='Resize', keep_ratio=True),
+            dict(type='RandomFlip'),
+            dict(
+                type='Normalize',
+                mean=[123.675, 116.28, 103.53],
+                std=[58.395, 57.12, 57.375],
+                to_rgb=True),
+            dict(type='Pad', size_divisor=32),
+            dict(type='ImageToTensor', keys=['img']),
+            dict(type='Collect', keys=['img'])
+        ])
+]
+
+# data settings
 data = dict(
-    samples_per_gpu=8, # GPU당 batch size 
-    workers_per_gpu=8,
+    samples_per_gpu=8, # batch size for GPU
+    workers_per_gpu=2, # num_workers
     train=dict(
-        classes=classes,
         type=dataset_type,
-        ann_file=data_root + 'train_0.json',
-        img_prefix=data_root ,
+        ann_file=data_root + 'train.json',  # use entire train dataset
+        img_prefix=data_root,
+        classes=classes,
         pipeline=train_pipeline),
     val=dict(
-        classes=classes,
         type=dataset_type,
         ann_file=data_root + 'valid_0.json',
         img_prefix=data_root,
-        pipeline=test_pipeline),
-    test=dict(
         classes=classes,
+        pipeline=valid_pipeline),
+    test=dict(
         type=dataset_type,
         ann_file=data_root + 'test.json',
         img_prefix=data_root,
+        classes=classes,
         pipeline=test_pipeline))
+
+# evaluation settings
 evaluation = dict(interval=1, metric='bbox')

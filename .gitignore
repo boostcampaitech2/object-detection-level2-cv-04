@@ -22,10 +22,10 @@ mmdetection/*
 !mmdetection/configs
 !mmdetection/README.md
 
+Swin-Transformer-Object-Detection/*
+!Swin-Transformer-Object-Detection/configs
+!Swin-Transformer-Object-Detection/README.md
+
 # Output
 output/detectron/*
 output/yolov5/*
-
-
-
-# library files / 추가하고 싶은 파일이 있다면, !mmdetection/custom와 같이 작성하여 추가할 수 있습니다.

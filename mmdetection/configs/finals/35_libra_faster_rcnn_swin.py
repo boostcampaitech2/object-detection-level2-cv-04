@@ -1,14 +1,29 @@
-_base_ = [ # 모델과 스케쥴러 수정
-    './faster_rcnn_r50_fpn.py',
-    './recycle_trash.py', # 쓰레기 데이터 셋 고정
-    './schedule_2x_SGD.py',
-    './default_runtime.py' # 런타임 고정 - 초기 wandb설정만 해줌
+##############################
+# Backbone: Swin-T           #
+# Neck:     FPN              #
+# Model:    Libra R-CNN      #
+# Opt:      SGD              #
+# LR:       0.02             #
+# Sch:      step             #
+# Epoch:    24               #
+# Batch:    8                #
+##############################
+
+# merge configs
+_base_ = [ 
+    '../models/faster_rcnn_r50_fpn.py',
+    '../datasets/dataset.py', 
+    '../schedules/schedule_2x_SGD.py',
+    '../default_runtime.py' 
 ]
 
+# Load pretrained Swin-T model
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_tiny_patch4_window7_224.pth'
+
+# set model backbone to Swin-S
 model = dict(
     backbone=dict(
-        _delete_=True, # 모델 지우고 새로 작성
+        _delete_=True,
         type='SwinTransformer',
         embed_dims=96,
         depths=[2, 2, 6, 2],

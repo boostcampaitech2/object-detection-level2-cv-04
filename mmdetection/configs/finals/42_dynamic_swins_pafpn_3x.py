@@ -1,15 +1,29 @@
-_base_ = [ # 모델과 스케쥴러 수정
-    './faster_rcnn_r50_fpn.py',
-    './recycle_trash.py', # 쓰레기 데이터 셋 고정
-    './schedule_3x.py',
-    './default_runtime.py' # 런타임 고정 - 초기 wandb설정만 해줌
+##############################
+# Backbone: Swin-S           #
+# Neck:     PA-FPN           #
+# Model:    Dynamic R-CNN    #
+# Opt:      AdamW            #
+# LR:       0.0001           #
+# Sch:      step             #
+# Epoch:    36               #
+# Batch:    4                #
+##############################
+
+# merge configs
+_base_ = [ 
+    '../models/faster_rcnn_r50_fpn.py',
+    '../datasets/dataset.py',
+    '../schedules/schedule_3x.py',
+    '../default_runtime.py' 
 ]
 
-# 수정 부분
+# Load pretrained Swin-S model
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_small_patch4_window7_224.pth'
+
+# set model backbone to Swin-S
 model = dict(
     backbone=dict(
-        _delete_=True, # 백본 지워
+        _delete_=True, 
         type='SwinTransformer',
         embed_dims=96,
         depths=[2, 2, 18, 2],
@@ -59,3 +73,9 @@ model = dict(
                 initial_iou=0.4,
                 initial_beta=1.0))),
     test_cfg=dict(rpn=dict(nms=dict(iou_threshold=0.85))))
+
+# modify batch size, num_workers
+data = dict(
+    samples_per_gpu=4, 
+    workers_per_gpu=2
+)

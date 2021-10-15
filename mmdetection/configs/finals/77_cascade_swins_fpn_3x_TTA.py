@@ -1,14 +1,26 @@
+##############################
+# Backbone: Swin-S           #
+# Neck:     FPN              #
+# Model:    Cascade R-CNN    #
+# Opt:      AdamW            #
+# LR:       0.0001           #
+# Sch:      CosineRestart    #
+# Epoch:    36               #
+# Batch:    8                #
+##############################
+
+# merge configs
 _base_ = [
-    'cascade_rcnn_r50_fpn.py',
-    'cascade_swins_dataset.py',
-    'default_runtime.py',
-    'schedule_3x_cosinerestart.py'
+    '../models/cascade_rcnn_r50_fpn.py',
+    '../datasets/dataset_cascade_swins.py',
+    '../default_runtime.py',
+    '../schedules/schedule_3x_cosinerestart.py'
 ]
 
-"""
-set model backbone to Swin-s
-"""
+# Load pretrained Swin-S model
 pretrained = 'https://github.com/SwinTransformer/storage/releases/download/v1.0.0/swin_small_patch4_window7_224.pth'
+
+# set model backbone to Swin-S
 model = dict(
     backbone=dict(
         _delete_=True,
@@ -31,7 +43,5 @@ model = dict(
     neck=dict(in_channels=[96, 192, 384, 768])
 )
 
-"""
-Mixed Precision training
-"""
+# Mixed Precision training
 fp16 = dict(loss_scale=512.)
