@@ -6,10 +6,10 @@ __pycache__/
 .readthedocs.yml
 
 # Dataset
-dataset/test/*
-dataset/train/*
-dataset/yolov5/images/*
-dataset/yolov5/labels/*
+0_dataset/test/*
+0_dataset/train/*
+0_dataset/yolov5/images/*
+0_dataset/yolov5/labels/*
 
 # Detectron
 detectron2/*
