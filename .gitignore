@@ -27,5 +27,5 @@ detectron2/*
 !1_Swin-Transformer-Object-Detection/README.md
 
 # Output
-output/detectron/*
-output/yolov5/*
+2_output/detectron/*
+2_output/yolov5/*
