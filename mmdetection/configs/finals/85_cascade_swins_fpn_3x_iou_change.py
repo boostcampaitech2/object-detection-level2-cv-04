@@ -1,7 +1,8 @@
 ##############################
-# Backbone: Swin-S           #
+# Model:    Swin-S           #
+# Backbone: Swin-T           #
 # Neck:     FPN              #
-# Model:    Cascade R-CNN    #
+# Head:     Cascade R-CNN    #
 # Opt:      AdamW            #
 # LR:       0.0001           #
 # Sch:      CosineRestart    #
