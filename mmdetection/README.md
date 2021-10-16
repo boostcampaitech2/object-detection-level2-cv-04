@@ -17,6 +17,12 @@ mim install mmdet
 ## Train
 ```
 cd mmdetection
-python tools/train.py configs/finals/[experiment_name].py
+python tools/train.py configs/finals/[experiment_name].py --work-dir ../output/mmdet/[experiment_name]
 ```
 all_data 실험의 경우, --no-validate 옵션을 주어 실행해야 합니다. 
+
+## Test
+```
+cd mmdetection
+python tools/inference.py configs/finals/[experiment_name].py latest --work-dir ../output/mmdet/[experiment_name]
+```
