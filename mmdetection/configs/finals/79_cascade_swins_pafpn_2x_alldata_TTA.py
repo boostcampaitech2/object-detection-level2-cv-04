@@ -1,7 +1,8 @@
 ##############################
+# Model:    Swin-T           #
 # Backbone: Swin-T           #
-# Neck:     PA-FPN           #
-# Model:    Cascade R-CNN    #
+# Neck:     FPN              #
+# Head:     Cascade R-CNN    #
 # Opt:      AdamW            #
 # LR:       0.0001           #
 # Sch:      CosineAnnealing  #
