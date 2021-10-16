@@ -1,7 +1,8 @@
 ##############################
+# Model:    Swin-T           #
 # Backbone: Swin-T           #
 # Neck:     FPN              #
-# Model:    Libra R-CNN      #
+# Head:     Libra R-CNN      #
 # Opt:      SGD              #
 # LR:       0.02             #
 # Sch:      step             #
