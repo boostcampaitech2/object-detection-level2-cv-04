@@ -74,10 +74,12 @@ Main Dependency : Yolov5, MMdetection, Detectron2, Pytorch 1.7.1, OpenCV 4.5.1
 object-detection-level2-cv-04
 ├──dataset
 |   ├──eda
-|   |   ├──detectron
-|   |   ├──mmdet
-|   |   └──yolov5
-|   └──json files
+|   |   └──yolov5 # dataset by yolo format
+|   └──json files # dataset by coco format
+├──output
+|   ├──detectron
+|   ├──mmdet
+|   └──yolov5
 ├──detectron
 ├──mmdetection
 ├──efficientdet
