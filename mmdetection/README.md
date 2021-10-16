@@ -1,7 +1,7 @@
 ## Overview
 
 |Model|Backbone|Neck|Head|Leaderborad mAP|
-|---|:---:|:---:|:---:|
+|---|:---:|:---:|:---:|:---:|
 |Swin-T|Swin-T|PA-FPN|Cascade-RCNN|0.599|
 |Swin-S|Swin-T|FPN|Cascade-RCNN|0.631|
 |Swin-B|Swin-T|FPN|Cascade-RCNN|0.629|
