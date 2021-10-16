@@ -1,10 +1,10 @@
 ## Overview
 
-|Model|Backbone|Neck|Leaderborad mAP|
+|Model|Backbone|Neck|Head|Leaderborad mAP|
 |---|:---:|:---:|:---:|
-|Cascade-RCNN|Swin-T|PA-FPN|0.599|
-|Cascade-RCNN|Swin-S|FPN|0.631|
-|Cascade-RCNN|Swin-B|FPN|0.629|
+|Swin-T|Swin-T|PA-FPN|Cascade-RCNN|0.599|
+|Swin-S|Swin-T|FPN|Cascade-RCNN|0.631|
+|Swin-B|Swin-T|FPN|Cascade-RCNN|0.629|
 
 ## Install mmdetection
 ```bash
