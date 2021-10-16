@@ -1,7 +1,8 @@
 ##############################
-# Backbone: Swin-S           #
+# Model:    Swin-S           #
+# Backbone: Swin-T           #
 # Neck:     PA-FPN           #
-# Model:    Dynamic R-CNN    #
+# Head:     Dynamic R-CNN    #
 # Opt:      AdamW            #
 # LR:       0.0001           #
 # Sch:      step             #
