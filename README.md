@@ -74,16 +74,15 @@ Main Dependency : Yolov5, MMdetection, Detectron2, Pytorch 1.7.1, OpenCV 4.5.1
 object-detection-level2-cv-04
 ├──dataset
 |   ├──eda
-|   |   ├──
-|   |   ├──
-|   |   └──
-|   └──something   
-├──train
-|    ├──images/
-|    ├──train_18class/
-|    ├──val_18class/
-|    └──train.csv
-└──something
+|   |   ├──detectron
+|   |   ├──mmdet
+|   |   └──yolov5
+|   └──json files
+├──detectron
+├──mmdetection
+├──efficientdet
+├──swin-b
+└──yolov5
 ```
 
 각 폴더 별 자세한 사용 설명은 폴더 내 README.md 참고
