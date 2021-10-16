@@ -81,7 +81,7 @@ object-detection-level2-cv-04
 ├──detectron
 ├──mmdetection
 ├──efficientdet
-├──swin-b
+├──Swin-Transformer-Object-Detection # swin-b
 └──yolov5
 ```
 
